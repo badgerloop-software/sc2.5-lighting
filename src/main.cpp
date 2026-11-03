@@ -7,8 +7,13 @@ LightingCAN Can1(CAN1, DEF);
 void setup() {
   pinMode(PA0, OUTPUT);
   pinMode(PA1, OUTPUT);
+  pinMode(PA2, OUTPUT);
+  pinMode(PA3, OUTPUT);
+  pinMode(PA4, OUTPUT);
+  pinMode(PA5, OUTPUT);
+  pinMode(PA6, OUTPUT);
 #ifdef PLATE_ALWAYS_ON
-  digitalWrite(PA1, HIGH);
+  digitalWrite(PA3, HIGH);
 #endif
 }
 
