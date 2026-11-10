@@ -18,6 +18,6 @@ void setup() {
 }
 
 void loop() {
-  Can1.runQueue(1);
+  Can1.runQueue(50);
   Can1.updateOutputs();
 }
