@@ -1,6 +1,6 @@
 #include "lightingCAN.h"
 
-volatile LED leds[2] = {
+volatile LED leds[7] = {
     {false, false, false, PA0},
     {false, false, false, PA1},
     {false, false, false, PA2},
@@ -17,12 +17,12 @@ LightingCAN::LightingCAN(CAN_TypeDef* canPort, CAN_PINS pins, int frequency) : C
 };
 
 bool LightingCAN::send() {
-    uint8_t abc = 12;
-    return this->sendMessage(0x700, (void*)&abc, sizeof(uint8_t));
+    uint8_t lighting_on = 1;
+    return this->sendMessage(lighting_id, (void*)&lighting_on, sizeof(uint8_t));
 }
 
 void LightingCAN::updateOutputs() {
-    for (uint8_t i = 0; i < 2; i++) {
+    for (uint8_t i = 0; i < 7; i++) {
         if (leds[i].on && leds[i].blinks) {
             setLED(i);
         }
