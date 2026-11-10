@@ -26,6 +26,7 @@
     #define BIT_OFF6 2
     #define LED_ID_7 0x300
     #define BIT_OFF7 2
+    #define lighting_id 0x799
 #elif BOARD == BACK_BOARD
     #define LED_ID_1 0x300
     #define BIT_OFF1 1
@@ -42,6 +43,7 @@
     #define BIT_OFF6 0
     #define LED_ID_7 0x300
     #define BIT_OFF7 2
+    #define lighting_id 0x798
 #endif
 
 typedef struct {

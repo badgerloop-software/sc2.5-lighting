@@ -18,7 +18,7 @@ LightingCAN::LightingCAN(CAN_TypeDef* canPort, CAN_PINS pins, int frequency) : C
 
 bool LightingCAN::send() {
     uint8_t lighting_on = 1;
-    return this->sendMessage(lighting_id, (void*)&lighting_on, sizeof(uint8_t));
+    return this->sendMessage(LIGHTING_ID, (void*)&lighting_on, sizeof(uint8_t));
 }
 
 void LightingCAN::updateOutputs() {
