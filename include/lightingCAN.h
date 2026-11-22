@@ -4,82 +4,46 @@
 #include <Arduino.h>
 #include "canmanager.h"
 
-#define L_FRONT_LIGHT 1
-#define R_FRONT_LIGHT 2
-#define L_SIDE_LIGHT 3
-#define R_SIDE_LIGHT 4
-#define L_REAR_LIGHT 5
-#define R_REAR_PLATE 6
-#define R_REAR_REVERSE 7
+#define FRONT_BOARD 1
+#define BACK_BOARD 2
 
-#define BOARD 3
+#define BOARD 2
 
 #define BLINK_DELAY 400
 
-#if BOARD == L_FRONT_LIGHT
-    #define LEFT_BLINK
-    #define HEADLIGHT
-#elif BOARD == R_FRONT_LIGHT
-    #define RIGHT_BLINK
-    #define HEADLIGHT
-#elif BOARD == L_SIDE_LIGHT
-    #define LEFT_BLINK
-    #define BPS_FAULT
-#elif BOARD == R_SIDE_LIGHT
-    #define RIGHT_BLINK
-    #define BRAKELIGHT
-#elif BOARD == L_REAR_LIGHT
-    #define LEFT_BLINK
-    #define BRAKELIGHT
-#elif BOARD == R_REAR_PLATE
-    #define RIGHT_BLINK
-    #define PLATE_ALWAYS_ON
-#elif BOARD == R_REAR_REVERSE
-    #define REVERSE
-    #define BRAKELIGHT
-#endif
-
-#ifdef LEFT_BLINK
+#if BOARD == FRONT_BOARD
     #define LED_ID_1 0x300
     #define BIT_OFF1 1
-    #define BLINK1 false
-#endif
-
-#ifdef RIGHT_BLINK
-    #define LED_ID_1 0x300
-    #define BIT_OFF1 2
-    #define BLINK1 false
-#endif
-
-#ifdef BPS_FAULT
-    #define LED_ID_2 0x505
-    #define BIT_OFF2 0
-    #define BLINK2 true
-#endif
-
-#ifdef BRAKELIGHT
-    #define LED_ID_2 0x207
-    #define BIT_OFF2 5
-    #define BLINK2 false
-#endif
-
-#ifdef HEADLIGHT
     #define LED_ID_2 0x300
+    #define BIT_OFF2 1
+    #define LED_ID_3 0x300
+    #define BIT_OFF3 0
+    #define LED_ID_4 0x207
+    #define BIT_OFF4 5
+    #define LED_ID_5 0x300
+    #define BIT_OFF5 0
+    #define LED_ID_6 0x300
+    #define BIT_OFF6 2
+    #define LED_ID_7 0x300
+    #define BIT_OFF7 2
+    #define LIGHTING_ID 0x799
+#elif BOARD == BACK_BOARD
+    #define LED_ID_1 0x300
+    #define BIT_OFF1 1
+    #define LED_ID_2 0x207
     #define BIT_OFF2 0
-    #define BLINK2 false
-#endif
-
-#ifdef REVERSE
-    #define LED_ID_1 0x207
-    #define BIT_OFF1 0
-    #define BLINK1 false
-#endif
-
-#ifndef BLINK1
-#define BLINK1 false
-#endif
-#ifndef BLINK2
-#define BLINK2 false
+    #define LED_ID_3 0x207
+    #define BIT_OFF3 5
+    #define LED_ID_4 0x000
+    #define BIT_OFF4 0
+    #define PLATE_ALWAYS_ON
+    #define LED_ID_5 0x207
+    #define BIT_OFF5 5
+    #define LED_ID_6 0x207
+    #define BIT_OFF6 0
+    #define LED_ID_7 0x300
+    #define BIT_OFF7 2
+    #define LIGHTING_ID 0x798
 #endif
 
 typedef struct {
@@ -89,7 +53,7 @@ typedef struct {
     uint32_t pin;
 } LED;
 
-extern volatile LED leds[2];
+extern volatile LED leds[7];
 
 class LightingCAN : public CANManager {
     public:
